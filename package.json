@@ -1,13 +1,13 @@
 {
-  "name": "oscd-component",
-  "description": "Webcomponent oscd-component following open-wc recommendations",
+  "name": "oscd-filtered-list",
+  "description": "Webcomponent oscd-filtered-list following open-wc recommendations",
   "license": "Apache-2.0",
   "version": "0.0.0",
   "type": "module",
-  "main": "dist/oscd-component.js",
-  "module": "dist/oscd-component.js",
+  "main": "dist/oscd-filtered-list.js",
+  "module": "dist/oscd-filtered-list.js",
   "exports": {
-    ".": "./dist/oscd-component.js"
+    ".": "./dist/oscd-filtered-list.js"
   },
   "scripts": {
     "analyze": "cem analyze",

@@ -6,15 +6,15 @@ import { customElement, property } from 'lit/decorators.js';
  *
  * @fires fake-event - This is just to show off README generation
  *
- * @cssprop --oscd-component-text-color - Controls the color of foo
+ * @cssprop --oscd-filtered-list-text-color - Controls the color of foo
  */
-@customElement('oscd-component')
+@customElement('oscd-filtered-list')
 export class OscdComponent extends LitElement {
   static styles = css`
     :host {
       display: block;
       padding: 25px;
-      color: var(--oscd-component-text-color, #000);
+      color: var(--oscd-filtered-list-text-color, #000);
     }
   `;
 

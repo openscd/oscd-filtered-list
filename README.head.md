@@ -1,21 +1,21 @@
-# \<oscd-component>
+# \<oscd-filtered-list>
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
 ## Installation
 
 ```bash
-npm i oscd-component
+npm i oscd-filtered-list
 ```
 
 ## Usage
 
 ```html
 <script type="module">
-  import 'oscd-component';
+  import 'oscd-filtered-list';
 </script>
 
-<oscd-component></oscd-component>
+<oscd-filtered-list></oscd-filtered-list>
 ```
 
 ## Linting and formatting

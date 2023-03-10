@@ -1,4 +1,4 @@
-# `oscd-component.ts`:
+# `oscd-filtered-list.ts`:
 
 ## class: `OscdComponent`
 

@@ -1,10 +1,10 @@
 import { html, TemplateResult } from 'lit';
 
-import './oscd-component.js';
+import './oscd-filtered-list.js';
 
 export default {
   title: 'OscdComponent',
-  component: 'oscd-component',
+  component: 'oscd-filtered-list',
   argTypes: {
     title: { control: 'text' },
     counter: { control: 'number' },
@@ -31,13 +31,13 @@ const Template: Story<ArgTypes> = ({
   textColor,
   slot,
 }: ArgTypes) => html`
-  <oscd-component
-    style="--oscd-component-text-color: ${textColor || 'black'}"
+  <oscd-filtered-list
+    style="--oscd-filtered-list-text-color: ${textColor || 'black'}"
     .title=${title}
     .counter=${counter}
   >
     ${slot}
-  </oscd-component>
+  </oscd-filtered-list>
 `;
 
 export const Regular = Template.bind({});
