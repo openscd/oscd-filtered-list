@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #fafafa;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="demo"></div>
+
+    <script type="module">
+      import { html, render } from 'lit';
+      import '../dist/src/oscd-filtered-list.js';
+
+      const list = [
+        { prim: 'item1prim', sec: 'item1sec', disabled: false },
+        { prim: 'item2prim', sec: 'item2sec', disabled: false },
+        { prim: 'item3prim', sec: 'item3sec', disabled: false },
+        { prim: 'item4prim', sec: 'item4sec', disabled: true },
+      ];
+
+      render(
+        html`
+          <oscd-filtered-list
+            multi
+            @selected=${() => {
+              console.log(`Selected`);
+            }}
+          >
+            ${Array.from(list).map(
+              item =>
+                html`<mwc-check-list-item twoline ?disabled=${item.disabled}
+                  ><span>${item.prim}</span
+                  ><span slot="secondary"
+                    >${item.sec}</span
+                  ></mwc-check-list-item
+                >`
+            )}
+          </oscd-filtered-list>
+        `,
+        document.querySelector('#demo')
+      );
+    </script>
+  </body>
+</html>
