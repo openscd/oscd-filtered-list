@@ -58,6 +58,21 @@ function hideFiltered(item: ListItem, searchText: string): void {
     : slotItem(item).classList.add('hidden');
 }
 
+export function redispatchEvent(element: Element, event: Event) {
+  // For bubbling events in SSR light DOM (or composed), stop their propagation  // and dispatch the copy.
+  const copy = Reflect.construct(event.constructor, [event.type, event]);
+  if (event.bubbles && (!element.shadowRoot || event.composed)) {
+    event.stopPropagation();
+    copy.stopPropagation();
+  }
+
+  const dispatched = element.dispatchEvent(copy);
+  if (!dispatched) {
+    event.preventDefault();
+  }
+  return dispatched;
+}
+
 /**
  *
  */
@@ -138,11 +153,11 @@ export class OscdFilteredList extends LitElement {
 
   constructor() {
     super();
-    this.addEventListener('selected', ev => {
-      this.requestUpdate();
-      this.shadowRoot?.dispatchEvent(
-        new CustomEvent('selected', { bubbles: true })
-      );
+    this.addEventListener('selected', event => {
+      redispatchEvent(this, event);
+    });
+    this.addEventListener('action', event => {
+      redispatchEvent(this, event);
     });
   }
 
@@ -173,9 +188,9 @@ export class OscdFilteredList extends LitElement {
         ${this.renderCheckAll()}
       </div>
       <mwc-list
-        multi=${this.multi}
-        activatable=${this.activatable}
-        wrapFocus=${this.wrapFocus}
+        .multi=${this.multi}
+        .activatable=${this.activatable}
+        .wrapFocus=${this.wrapFocus}
       >
         <slot />
       </mwc-list>`;
