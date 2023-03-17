@@ -41,7 +41,8 @@ describe('oscd-filtered-list', () => {
   });
 
   it('allows items to be activated when selected', async () => {
-    element.setAttribute('activatable', '');
+    element.activatable = true;
+    await element.updateComplete;
     element.children[0].setAttribute('selected', '');
     element.requestUpdate();
     await element.updateComplete;

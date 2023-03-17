@@ -58,7 +58,8 @@ function hideFiltered(item: ListItem, searchText: string): void {
     : slotItem(item).classList.add('hidden');
 }
 
-export function redispatchEvent(element: Element, event: Event) {
+export function redispatchEvent(element: LitElement, event: Event) {
+  element.requestUpdate();
   // For bubbling events in SSR light DOM (or composed), stop their propagation  // and dispatch the copy.
   const copy = Reflect.construct(event.constructor, [event.type, event]);
   if (event.bubbles && (!element.shadowRoot || event.composed)) {
