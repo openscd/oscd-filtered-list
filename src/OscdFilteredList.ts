@@ -105,6 +105,10 @@ export class OscdFilteredList extends LitElement {
     return this.list.selected;
   }
 
+  get index() {
+    return this.list.index;
+  }
+
   @property()
   items: Array<ListItem> = [];
 
