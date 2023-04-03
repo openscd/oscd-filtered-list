@@ -1,5 +1,5 @@
 {
-  "name": "@open-scd/oscd-filtered-list",
+  "name": "@openscd/oscd-filtered-list",
   "description": "Webcomponent oscd-filtered-list following open-wc recommendations",
   "license": "Apache-2.0",
   "author": "Alliander",
