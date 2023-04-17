@@ -3,7 +3,7 @@
   "description": "Webcomponent oscd-filtered-list following open-wc recommendations",
   "license": "Apache-2.0",
   "author": "Alliander",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/src/oscd-filtered-list.js",
   "module": "dist/src/oscd-filtered-list.js",
   "exports": {

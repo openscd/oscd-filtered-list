@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/openscd/oscd-filtered-list/compare/v1.0.0...v1.0.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* changed npm publish to public ([9435ee8](https://github.com/openscd/oscd-filtered-list/commit/9435ee83f7d451f040ae84fef2a1a98ab26c5fa8))
+
 ## 1.0.0 (2023-04-03)
 
 
