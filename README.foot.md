@@ -1,1 +1,1 @@
-&copy; 2023
+&copy; 2023 Alliander N.V.
