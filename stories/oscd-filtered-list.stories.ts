@@ -35,20 +35,17 @@ interface ArgTypes {
 const Template: Story<ArgTypes> = ({ list = listItems }: ArgTypes) => {
   if (customElements.get('sb-oscd-filtered-list') === undefined)
     customElements.define('sb-oscd-filtered-list', SBOscdFilteredList);
-  return html`<sb-oscd-filtered-list multi
-    >${Array.from(list).map(
-      item =>
-        html`<mwc-check-list-item twoline ?disabled=${item.disabled}
-          ><span>${item.prim}</span
-          ><span slot="secondary">${item.sec}</span></mwc-check-list-item
-        >`
-    )}<abbr
-      ><mwc-list-item><span>nestedItem5</span></mwc-list-item></abbr
-    ><abbr
-      ><div>
-        <mwc-radio-list-item><span>nestedItem6</span></mwc-radio-list-item>
-      </div></abbr
-    ><mwc-list-item value="valueItem7">valueItem7</mwc-list-item>
-  </sb-oscd-filtered-list>`;
+  return html` <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
+      rel="stylesheet"
+    /><sb-oscd-filtered-list multi>
+      ${Array.from(list).map(
+        item =>
+          html`<mwc-check-list-item twoline ?disabled=${item.disabled}
+            ><span>${item.prim}</span
+            ><span slot="secondary">${item.sec}</span></mwc-check-list-item
+          >`
+      )}
+    </sb-oscd-filtered-list>`;
 };
 export const Regular = Template.bind({});
