@@ -1,4 +1,4 @@
-# Don't rely on third party dependencies for the filtered-list
+# Encapsulate third party components instead of extending it
 
 Date: 2023-05-15
 
@@ -34,12 +34,10 @@ In these examples the UpdateDescriptionSel.ts file is used.
 
 - A mwc-list type parameter for the WizardDialog where the query searches for mwc-list:
   ![ListParameter](https://github.com/openscd/oscd-filtered-list/assets/35229971/a0f66c5a-2f23-4ab6-ad9d-e145c179c3f8)
-  
 - A mwc-list type parameter for the WizardActor in a foundation file:
   ![ListParameter1](https://github.com/openscd/oscd-filtered-list/assets/35229971/10e4e40e-b5f6-4974-935c-4848c6f10c55)
 
 - An example of what happens when implementing the oscd-filtered-list (when mwc-list is rendered instead of extended):
   ![WithoutWait](https://github.com/openscd/oscd-filtered-list/assets/35229971/60091e11-6c94-4d2e-9c8b-7a69c947efc9)
-  
 - An example of correctly updating the oscd-filtered-list content:
   ![WithWait](https://github.com/openscd/oscd-filtered-list/assets/35229971/37c30462-eb75-4488-8e5b-2cd53b710710)
