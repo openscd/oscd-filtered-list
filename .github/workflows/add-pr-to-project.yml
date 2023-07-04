@@ -14,8 +14,8 @@ jobs:
     steps:
       - name: add-new-pull-request-to-organization-based-project-column
         if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && github.event.action == 'opened'
-        uses: alex-page/github-project-automation-plus@v0.8.3
+        uses: docker://takanabe/github-actions-automate-projects:v0.0.1
         with:
-          project: Open Pull-Requests Overview Board
-          column: Todo
-          repo-token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
+          GITHUB_PROJECT_URL: https://github.com/orgs/openscd/projects/7
+          GITHUB_PROJECT_COLUMN_NAME: Todo
