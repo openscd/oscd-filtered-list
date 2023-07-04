@@ -24,5 +24,5 @@ jobs:
           project_id: 7
           gh_token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
           organization: openscd
-          resource_node_id: ${{ github.event.issue.node_id }}
+          resource_node_id: ${{ github.event.pull_request.node_id }}
           status_value: ${{ env.todo }} # Target status
