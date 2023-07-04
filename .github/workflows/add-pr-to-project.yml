@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2023 Alliander N.V.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: Add pull requests to the overview board
+
+on: [pull_request, pull_request_target]
+
+jobs:
+  github-actions-automate-projects:
+    runs-on: ubuntu-latest
+
+    if: ${{ (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]') || (github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target') }}
+    steps:
+      - name: add-new-pull-request-to-organization-based-project-column
+        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && github.event.action == 'opened'
+        uses: alex-page/github-project-automation-plus@v0.8.3
+        with:
+          project: Open Pull-Requests Overview Board
+          column: Todo
+          repo-token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
