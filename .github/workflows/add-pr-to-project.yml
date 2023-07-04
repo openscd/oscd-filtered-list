@@ -6,16 +6,23 @@ name: Add pull requests to the overview board
 
 on: [pull_request, pull_request_target]
 
+env:
+  todo: Todo
+  done: Done
+  in_progress: In Progress
+
 jobs:
   github-actions-automate-projects:
     runs-on: ubuntu-latest
 
     if: ${{ (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]') || (github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target') }}
     steps:
-      - name: add-new-pull-request-to-organization-based-project-column
+      - name: Move PR to ${{ env.todo }}
         if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && github.event.action == 'opened'
-        uses: docker://takanabe/github-actions-automate-projects:v0.0.1
+        uses: leonsteinhaeuser/project-beta-automations@v2.1.0
         with:
-          GITHUB_TOKEN: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
-          GITHUB_PROJECT_URL: https://github.com/orgs/openscd/projects/7
-          GITHUB_PROJECT_COLUMN_NAME: Todo
+          project_id: 7
+          gh_token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
+          organization: openscd
+          resource_node_id: ${{ github.event.issue.node_id }}
+          status_value: ${{ env.todo }} # Target status
