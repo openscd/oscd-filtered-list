@@ -18,7 +18,7 @@ jobs:
     if: ${{ (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]') || (github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target') }}
     steps:
       - name: Move PR to ${{ env.todo }}
-        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && github.event.action == 'opened'
+        if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && (github.event.action == 'opened' || github.event.action == 'reopened')
         uses: leonsteinhaeuser/project-beta-automations@v2.1.0
         with:
           project_id: 7
