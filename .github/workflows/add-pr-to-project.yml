@@ -8,7 +8,6 @@ on: [pull_request, pull_request_target, pull_request_review]
 
 env:
   todo: Todo
-  done: Done
   in_progress: In Progress
 
 jobs:
@@ -27,7 +26,7 @@ jobs:
           resource_node_id: ${{ github.event.pull_request.node_id }}
           status_value: ${{ env.todo }} # Target status
       - name: Move PR to ${{env.in_progress}}
-        if: github.event.review.state == 'approved'
+        if: github.event.review.state == 'approved' || github.event.review.state == 'changes_requested'
         uses: leonsteinhaeuser/project-beta-automations@v2.1.0
         with:
           project_id: 7
