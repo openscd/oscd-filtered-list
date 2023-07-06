@@ -66,6 +66,18 @@ For most of the tools, the configuration is in the `package.json` to reduce the 
 
 If you customize the configuration a lot, you can consider moving them to individual files.
 
+### Icon font
+
+Material Icons are being used for the icons. This font needs to be added in the html first.
+You can add it like so:
+
+```html
+<link
+  href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
+  rel="stylesheet"
+/>
+```
+
 ## Local Demo with `web-dev-server`
 
 ```bash
@@ -74,43 +86,71 @@ npm start
 
 To run a local development server that serves the basic demo located in `demo/index.html`
 
-## `OscdFilteredList.ts`:
 
-### class: `OscdFilteredList`
+## `src/oscd-filtered-list.ts`:
+
+### class: `OscdFilteredList`, `oscd-filtered-list`
 
 #### Superclass
 
-| Name         | Module | Package |
-| ------------ | ------ | ------- |
-| `LitElement` |        | lit     |
+| Name         | Module | Package     |
+| ------------ | ------ | ----------- |
+| `LitElement` |        | lit-element |
 
-#### Properties/Attributes
+#### Fields
 
-| Name               | Type           | Default | Inherited From       | Description                                                                                                                                                                                                                               |
-| ------------------ | -------------- | ------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `searchFieldLabel` | `string`       | `null`  | `null`               | Default text on the filter textbox                                                                                                                                                                                                        |
-| `disableCheckAll`  | `boolean`      | `false` |                      | When `true`, disables the "check all" button                                                                                                                                                                                              |
-| `filter`           | `string`       | `null`  | `null`               | The current input value of the filter textbox                                                                                                                                                                                             |
-| `wrapFocus`        | `boolean`      | `false` |                      | When `true`, pressing `up` on the keyboard when focused on the first item will focus the last item and `down` when focused on the last item will focus the first item.                                                                    |
-| `multi`            | `boolean`      | `false` |                      | When `true`, enables selection of multiple items. This will result in `index` being of type `Set<number>` and selected returning `ListItemBase[]`.                                                                                        |
-| `activatable`      | `boolean`      | `false` |                      | Sets activated attribute on selected items which provides a focus-persistent highlight.                                                                                                                                                   |
-| `items`            | `ListItem[]`   | `[]`    |                      | All list items that are available for selection. Eligible items have the `[mwc-list-item]` attribute which `ListItemBase` applies automatically.                                                                                          |
-| `selected`         | `SelectedType` | `null`  | `@material/mwc-list` | Currently-selected list item(s). When `multi` is `true`, `selected` is of type `ListItemBase[]` and when `false`, `selected` is of type `ListItemBase`. `selected` is `null` when no item is selected.                                    |
-| `index`            | `MWCListIndex` | `-1`    | `@material/mwc-list` | Index / indices of selected item(s). When `multi` is `true`, `index` is of type `number` and when `false`, `index` is of type `Set<number>`. Unset indicies are `-1` and empty `Set<number>` for single and multi selection respectively. |
+| Name               | Privacy | Type                  | Default | Description                                                                                                                                                                                                                                                   | Inherited From |
+| ------------------ | ------- | --------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `searchFieldLabel` |         | `string \| undefined` |         | search mwc-textfield label property                                                                                                                                                                                                                           |                |
+| `disableCheckAll`  |         | `boolean`             | `false` | Whether the check all option (checkbox next to search text field) is activated                                                                                                                                                                                |                |
+| `filter`           |         | `string \| undefined` |         | The current input value of the filter textbox                                                                                                                                                                                                                 |                |
+| `wrapFocus`        |         | `boolean`             | `false` | When \`true\`, pressing \`up\` on the keyboard when focused on the first item will focus the last item and \`down\` when focused on the last item will focus the first item.                                                                                  |                |
+| `multi`            |         | `boolean`             | `false` | When \`true\`, enables selection of multiple items. This will result in \`index\` being of type \`Set\<number>\` and selected returning \`ListItemBase\[]\`.                                                                                                  |                |
+| `activatable`      |         | `boolean`             | `false` | Sets activated attribute on selected items which provides a focus-persistent highlight.                                                                                                                                                                       |                |
+| `list`             |         | `List`                |         |                                                                                                                                                                                                                                                               |                |
+| `selected`         |         |                       |         | Currently-selected list item(s). When \`multi\` is \`true\`, \`selected\` is of type \`ListItemBase\[]\` and when \`false\`, \`selected\` is of type \`ListItemBase\`. \`selected\` is \`null\` when no item is selected.                                     |                |
+| `index`            |         |                       |         | Index / indices of selected item(s). When \`multi\` is \`true\`, \`index\` is of type \`number\` and when \`false\`, \`index\` is of type \`Set\<number>\`. Unset indicies are \`-1\` and empty \`Set\<number>\` for single and multi selection respectively. |                |
+| `items`            |         | `Array<ListItem>`     | `[]`    | All list items that are available for selection. Eligible items have the \`\[mwc-list-item]\` attribute which \`ListItemBase\` applies automatically.                                                                                                         |                |
+| `searchField`      |         | `TextField`           |         |                                                                                                                                                                                                                                                               |                |
+
+#### Methods
+
+| Name            | Privacy | Description | Parameters | Return | Inherited From |
+| --------------- | ------- | ----------- | ---------- | ------ | -------------- |
+| `onFilterInput` |         |             |            | `void` |                |
 
 #### Events
 
-| Event Name | Target               | Detail               | Inherited From       | Description                                                                                                                                                                                                                                         |
-| ---------- | -------------------- | -------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `action`   | `oscd-filtered-list` | `ActionDetail`\*     | `@material/mwc-list` | Fired when a selection has been made via click or keyboard aciton.                                                                                                                                                                                  |
-| `selected` | `oscd-filtered-list` | `SelectedDetail`\*\* | `@material/mwc-list` | Fired when a selection has been made. `index` is the selected index (will be of type `Set<number>` if multi and `number` if single), and `diff` (of type `IndexDiff`\*\*) represents the diff of added and removed indices from previous selection. |
+| Name       | Type            | Description                                                                                                                                                                                                                                                        | Inherited From |
+| ---------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
+| `action`   | `ActionEvent`   | Fired when a selection has been made via click or keyboard action.                                                                                                                                                                                                 |                |
+| `selected` | `SelectedEvent` | Fired when a selection has been made. \`index\` is the selected index (will be of type \`Set\<number>\` if multi and \`number\` if single), and \`diff\` (of type \`IndexDiff\`\\\*\\\*) represents the diff of added and removed indices from previous selection. |                |
+
+<hr/>
+
+### Functions
+
+| Name              | Description | Parameters                          | Return |
+| ----------------- | ----------- | ----------------------------------- | ------ |
+| `redispatchEvent` |             | `element: LitElement, event: Event` |        |
 
 <hr/>
 
 ### Exports
 
-| Kind | Name               | Declaration      | Module              | Package |
-| ---- | ------------------ | ---------------- | ------------------- | ------- |
-| `js` | `OscdFilteredList` | OscdFilteredList | OscdFilteredList.ts |         |
+| Kind | Name               | Declaration      | Module                    | Package |
+| ---- | ------------------ | ---------------- | ------------------------- | ------- |
+| `js` | `redispatchEvent`  | redispatchEvent  | src/oscd-filtered-list.ts |         |
+| `js` | `OscdFilteredList` | OscdFilteredList | src/oscd-filtered-list.ts |         |
+
+## `src/OscdFilteredList.ts`:
+
+### Exports
+
+| Kind                        | Name                 | Declaration      | Module                     | Package |
+| --------------------------- | -------------------- | ---------------- | -------------------------- | ------- |
+| `custom-element-definition` | `oscd-filtered-list` | OscdFilteredList | /src/oscd-filtered-list.js |         |
+| `js`                        | `OscdFilteredList`   | OscdFilteredList | src/OscdFilteredList.ts    |         |
+
 
 &copy; 2023 Alliander N.V.

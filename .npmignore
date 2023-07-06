@@ -12,6 +12,9 @@
 ## testing
 /coverage/
 
+## failed screenshots
+/screenshots/*/failed/
+
 ## local debug
 /.npmrc
 
