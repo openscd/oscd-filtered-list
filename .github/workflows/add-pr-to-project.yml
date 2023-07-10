@@ -48,7 +48,7 @@ jobs:
           name: REVIEW_DATA
       - name: Read PR review event's PR_NODE_ID.txt
         if: github.event.workflow_run.event == 'pull_request_review'
-        id: pr_node_id
+        id: review_pr_node_id
         uses: juliangruber/read-file-action@v1
         with:
           path: ./PR_NODE_ID.txt
@@ -75,7 +75,7 @@ jobs:
           project_id: 7
           gh_token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
           organization: openscd
-          resource_node_id: ${{ steps.pr_node_id.outputs.content }}
+          resource_node_id: ${{ steps.review_pr_node_id.outputs.content }}
           status_value: ${{ env.approved }}
       - name: Move PR to ${{env.changes_requested}}
         if: github.event.workflow_run.event == 'pull_request_review' && steps.review_state.outputs.content == 'changes_requested'
@@ -84,5 +84,5 @@ jobs:
           project_id: 7
           gh_token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
           organization: openscd
-          resource_node_id: ${{ steps.pr_node_id.outputs.content }}
+          resource_node_id: ${{ steps.review_pr_node_id.outputs.content }}
           status_value: ${{ env.changes_requested }}
