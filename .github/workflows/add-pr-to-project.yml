@@ -63,38 +63,36 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: ./REVIEW_STATE.txt
-  automation:
-    runs-on: ubuntu-latest
-    needs: data_retrieval
-    steps:
+
       # Project automation steps
       - run: |
           echo "Check 'should_run'"
-          echo "${{ github.event.workflow_run.event }}"
+          echo "${{ steps.event_action.outputs.content }}"
+          echo "${{ steps.review_state.outputs.content == 'reopened' }}"
       - name: Move PR to ${{ env.todo }}
-        if: (github.event.workflow_run.event == 'pull_request' || github.event.workflow_run.event == 'pull_request_target') && (needs.data_retrieval.outputs.event_action == 'opened' || needs.data_retrieval.outputs.event_action == 'reopened')
+        if: (github.event.workflow_run.event == 'pull_request' || github.event.workflow_run.event == 'pull_request_target') && (steps.event_action.outputs.content == 'opened' || steps.event_action.outputs.content == 'reopened')
         uses: leonsteinhaeuser/project-beta-automations@v2.1.0
         with:
           project_id: 7
           gh_token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
           organization: openscd
-          resource_node_id: ${{ needs.data_retrieval.outputs.pr_node_id }}
+          resource_node_id: ${{ steps.pr_node_id.outputs.content }}
           status_value: ${{ env.todo }}
       - name: Move PR to ${{env.approved}}
-        if: github.event.workflow_run.event == 'pull_request_review' && needs.data_retrieval.outputs.review_state == 'approved'
+        if: github.event.workflow_run.event == 'pull_request_review' && steps.review_state.outputs.content == 'approved'
         uses: leonsteinhaeuser/project-beta-automations@v2.1.0
         with:
           project_id: 7
           gh_token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
           organization: openscd
-          resource_node_id: ${{ needs.data_retrieval.outputs.review_pr_node_id }}
+          resource_node_id: ${{ steps.review_pr_node_id.outputs.content }}
           status_value: ${{ env.approved }}
       - name: Move PR to ${{env.changes_requested}}
-        if: github.event.workflow_run.event == 'pull_request_review' && needs.data_retrieval.outputs.review_state == 'changes_requested'
+        if: github.event.workflow_run.event == 'pull_request_review' && steps.review_state.outputs.content == 'changes_requested'
         uses: leonsteinhaeuser/project-beta-automations@v2.1.0
         with:
           project_id: 7
           gh_token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
           organization: openscd
-          resource_node_id: ${{ needs.data_retrieval.outputs.review_pr_node_id }}
+          resource_node_id: ${{ steps.review_pr_node_id.outputs.content }}
           status_value: ${{ env.changes_requested }}
