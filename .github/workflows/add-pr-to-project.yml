@@ -68,10 +68,6 @@ jobs:
     needs: data_retrieval
     steps:
       # Project automation steps
-      ## Log step to confirm the PR node_id and event_action
-      - name: Log PR event_action
-        if: github.event.workflow_run.event == 'pull_request' || github.event.workflow_run.event == 'pull_request_target'
-        run: echo ${{ needs.data_retrieval.outputs.event_action }}
       - name: Move PR to ${{ env.todo }}
         if: (github.event.workflow_run.event == 'pull_request' || github.event.workflow_run.event == 'pull_request_target') && (needs.data_retrieval.outputs.event_action == 'opened' || needs.data_retrieval.outputs.event_action == 'reopened')
         uses: leonsteinhaeuser/project-beta-automations@v2.1.0
@@ -81,6 +77,9 @@ jobs:
           organization: openscd
           resource_node_id: ${{ needs.data_retrieval.outputs.pr_node_id }}
           status_value: ${{ env.todo }}
+      - name: Setup tmate session
+        if: success() || failure()
+        uses: mxschmitt/action-tmate@v3
       - name: Move PR to ${{env.approved}}
         if: github.event.workflow_run.event == 'pull_request_review' && needs.data_retrieval.outputs.review_state == 'approved'
         uses: leonsteinhaeuser/project-beta-automations@v2.1.0
