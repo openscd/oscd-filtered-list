@@ -37,12 +37,14 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: ./PR_NODE_ID.txt
+          trim: true
       - name: Read PR event's EVENT_ACTION.txt
         if: github.event.workflow_run.event == 'pull_request' || github.event.workflow_run.event == 'pull_request_target'
         id: event_action
         uses: juliangruber/read-file-action@v1
         with:
           path: ./EVENT_ACTION.txt
+          trim: true
       # Data retrieval steps in case of a PR review event
       - name: Download PR review data artifact
         if: github.event.workflow_run.event == 'pull_request_review'
@@ -57,18 +59,16 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: ./PR_NODE_ID.txt
+          trim: true
       - name: Read PR review event's REVIEW_STATE.txt
         if: github.event.workflow_run.event == 'pull_request_review'
         id: review_state
         uses: juliangruber/read-file-action@v1
         with:
           path: ./REVIEW_STATE.txt
+          trim: true
 
       # Project automation steps
-      - run: |
-          echo "Check 'should_run'"
-          echo "${{ steps.event_action.outputs.content }}"
-          echo "${{ steps.review_state.outputs.content == 'reopened' }}"
       - name: Move PR to ${{ env.todo }}
         if: (github.event.workflow_run.event == 'pull_request' || github.event.workflow_run.event == 'pull_request_target') && (steps.event_action.outputs.content == 'opened' || steps.event_action.outputs.content == 'reopened')
         uses: leonsteinhaeuser/project-beta-automations@v2.1.0
