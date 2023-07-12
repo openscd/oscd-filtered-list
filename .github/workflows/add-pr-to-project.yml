@@ -13,6 +13,7 @@ env:
   todo: Pending
   changes_requested: Changes Requested
   approved: Approved
+  done: Done
 
 jobs:
   read-data-and-automate:
@@ -44,6 +45,13 @@ jobs:
         uses: juliangruber/read-file-action@v1
         with:
           path: ./EVENT_ACTION.txt
+          trim: true
+      - name: Read PR event's IS_MERGED.txt
+        if: github.event.workflow_run.event == 'pull_request' || github.event.workflow_run.event == 'pull_request_target'
+        id: is_merged
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./IS_MERGED.txt
           trim: true
       # Data retrieval steps in case of a PR review event
       - name: Download PR review data artifact
@@ -100,3 +108,13 @@ jobs:
           organization: openscd
           resource_node_id: ${{ steps.review_pr_node_id.outputs.content }}
           status_value: ${{ env.changes_requested }}
+      - name: Move PR to ${{env.done}}
+        if: (github.event.workflow_run.event == 'pull_request' ||
+          github.event.workflow_run.event == 'pull_request_target') && steps.is_merged.outputs.content == 'true'
+        uses: leonsteinhaeuser/project-beta-automations@v2.1.0
+        with:
+          project_id: 7
+          gh_token: ${{ secrets.ORG_GITHUB_ACTION_SECRET }}
+          organization: openscd
+          resource_node_id: ${{ steps.review_pr_node_id.outputs.content }}
+          status_value: ${{ env.done }}
