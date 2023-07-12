@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Save PR node_id and event_action to files
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
-        run: echo ${{ github.event.pull_request.node_id }} > PR_NODE_ID.txt && echo ${{ github.event.action }} > EVENT_ACTION.txt
+        run: echo ${{ github.event.pull_request.node_id }} > PR_NODE_ID.txt && echo ${{ github.event.action }} > EVENT_ACTION.txt && echo ${{ github.event.pull_request.merged }} > IS_MERGED.txt
       - name: Archive PR node_id and event_action
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
         uses: actions/upload-artifact@v3
@@ -24,6 +24,7 @@ jobs:
           path: |
             PR_NODE_ID.txt
             EVENT_ACTION.txt
+            IS_MERGED.txt
       - name: Save PR node_id and review_state to files
         if: github.event_name == 'pull_request_review'
         run: echo ${{ github.event.pull_request.node_id }} > PR_NODE_ID.txt && echo ${{ github.event.review.state }} > REVIEW_STATE.txt
