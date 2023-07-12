@@ -1,7 +1,6 @@
 import { html, TemplateResult } from 'lit-element';
 import '@material/mwc-list/mwc-check-list-item';
-import '../src/oscd-filtered-list';
-import { OscdFilteredList } from '../src/OscdFilteredList.js';
+import '../src/OscdFilteredList';
 
 const itemType = { prim: 'item1', sec: 'item1sec', disabled: false };
 
@@ -13,14 +12,12 @@ const listItems = [
 ];
 
 export default {
-  title: 'oscd-filtered-list',
-  component: 'OscdFilteredList',
+  title: 'OscdFilteredList',
+  component: 'oscd-filtered-list',
   argTypes: {
     list: { control: 'array', option: listItems },
   },
 };
-
-class SBOscdFilteredList extends OscdFilteredList {}
 
 interface Story<T> {
   (args: T): TemplateResult;
@@ -33,12 +30,10 @@ interface ArgTypes {
 }
 
 const Template: Story<ArgTypes> = ({ list = listItems }: ArgTypes) => {
-  if (customElements.get('sb-oscd-filtered-list') === undefined)
-    customElements.define('sb-oscd-filtered-list', SBOscdFilteredList);
   return html` <link
       href="https://fonts.googleapis.com/css?family=Material+Icons&display=block"
       rel="stylesheet"
-    /><sb-oscd-filtered-list multi>
+    /><oscd-filtered-list multi>
       ${Array.from(list).map(
         item =>
           html`<mwc-check-list-item twoline ?disabled=${item.disabled}
@@ -46,6 +41,6 @@ const Template: Story<ArgTypes> = ({ list = listItems }: ArgTypes) => {
             ><span slot="secondary">${item.sec}</span></mwc-check-list-item
           >`
       )}
-    </sb-oscd-filtered-list>`;
+    </oscd-filtered-list>`;
 };
 export const Regular = Template.bind({});

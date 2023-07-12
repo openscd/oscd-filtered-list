@@ -4,35 +4,40 @@
   "license": "Apache-2.0",
   "author": "Alliander",
   "version": "1.0.1",
-  "main": "dist/src/oscd-filtered-list.js",
-  "module": "dist/src/oscd-filtered-list.js",
+  "browser": "./dist/OscdFilteredList.js",
+  "module": "./dist/OscdFilteredList.js",
+  "files": [
+    "dist/**/*"
+  ],
   "exports": {
-    ".": "./dist/src/oscd-filtered-list.js"
+    ".": "./dist/OscdFilteredList.js"
   },
   "type": "module",
   "scripts": {
-    "analyze": "cem analyze --litelement",
+    "analyze": "cem analyze",
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
     "build": "tsc && npm run analyze -- --exclude dist",
     "prepublish": "tsc && npm run analyze -- --exclude dist",
     "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
     "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
-    "test": "tsc && wtr --coverage",
-    "test:watch": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wtr --watch\"",
-    "test:unit": "tsc && wtr --group default",
-    "storybook": "tsc && npm run analyze -- --exclude dist && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds -c .storybook/server.mjs\"",
-    "storybook:build": "tsc && npm run analyze -- --exclude dist && build-storybook",
+    "test": "tsc --p tsconfig.test.json && wtr --coverage",
+    "test:unit": "tsc --p tsconfig.test.json && wtr --group default",
+    "test:visual": "tsc --p tsconfig.test.json && wtr --group visual",
+    "test:update": "tsc --p tsconfig.test.json && wtr --group visual --update-visual-baseline",
+    "test:watch": "tsc --p tsconfig.test.json && concurrently -k -r \"tsc --p tsconfig.test.json --watch --preserveWatchOutput\" \"wtr --watch\"",
+    "storybook": "tsc --p tsconfig.test.json && npm run analyze -- --exclude dist && concurrently -k -r \"tsc --p tsconfig.test.json --watch --preserveWatchOutput\" \"wds -c .storybook/server.mjs\"",
+    "storybook:build": "tsc --p tsconfig.test.json && npm run analyze -- --exclude dist && build-storybook",
     "deploy": "npm run storybook:build && gh-pages --dist storybook-static"
   },
   "dependencies": {
-    "@material/mwc-button": "0.22.1",
-    "@material/mwc-checkbox": "0.22.1",
-    "@material/mwc-dialog": "0.22.1",
-    "@material/mwc-formfield": "0.22.1",
-    "@material/mwc-icon": "0.22.1",
-    "@material/mwc-icon-button": "0.22.1",
-    "@material/mwc-list": "0.22.1",
-    "@material/mwc-textfield": "0.22.1",
+    "@material/mwc-button": "0.27.0",
+    "@material/mwc-checkbox": "0.27.0",
+    "@material/mwc-dialog": "0.27.0",
+    "@material/mwc-formfield": "0.27.0",
+    "@material/mwc-icon": "0.27.0",
+    "@material/mwc-icon-button": "0.27.0",
+    "@material/mwc-list": "0.27.0",
+    "@material/mwc-textfield": "0.27.0",
     "lit-element": "2.5.1",
     "lit-html": "1.4.1",
     "lit-translate": "^1.2.1"
@@ -48,6 +53,8 @@
     "@web/dev-server": "^0.1.34",
     "@web/dev-server-storybook": "^0.5.4",
     "@web/test-runner": "^0.14.0",
+    "@web/test-runner-playwright": "^0.9.0",
+    "@web/test-runner-visual-regression": "^0.7.0",
     "cem-plugin-readme": "^0.1.4",
     "concurrently": "^5.3.0",
     "eslint": "^7.32.0",
@@ -62,13 +69,6 @@
     "typescript": "^4.9.5"
   },
   "customElements": "custom-elements.json",
-  "eslintConfig": {
-    "extends": [
-      "@open-wc/eslint-config",
-      "eslint-config-prettier",
-      "ts-standard"
-    ]
-  },
   "prettier": {
     "singleQuote": true,
     "arrowParens": "avoid"
