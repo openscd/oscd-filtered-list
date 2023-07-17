@@ -8,7 +8,7 @@ import {
   TemplateResult,
   unsafeCSS,
 } from 'lit-element';
-import { translate } from 'lit-translate';
+import { msg } from '@lit/localize';
 
 import '@material/mwc-checkbox';
 import '@material/mwc-formfield';
@@ -185,7 +185,7 @@ export class OscdFilteredList extends LitElement {
 
   render(): TemplateResult {
     return html`<div id="tfcontainer">
-        <abbr title="${this.searchFieldLabel ?? translate('filter')}"
+        <abbr title="${this.searchFieldLabel ?? msg('Filter')}"
           ><mwc-textfield
             label="${this.searchFieldLabel ?? ''}"
             iconTrailing="search"
