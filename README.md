@@ -153,7 +153,4 @@ To run a local development server that serves the basic demo located in `demo/in
 | `js`                        | `OscdFilteredList`   | OscdFilteredList | src/OscdFilteredList.ts    |         |
 
 
-
-
-
 &copy; 2023 Alliander N.V.

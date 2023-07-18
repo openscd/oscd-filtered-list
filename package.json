@@ -30,6 +30,7 @@
     "deploy": "npm run storybook:build && gh-pages --dist storybook-static"
   },
   "dependencies": {
+    "@lit/localize": "^0.11.4",
     "@material/mwc-button": "0.27.0",
     "@material/mwc-checkbox": "0.27.0",
     "@material/mwc-dialog": "0.27.0",
@@ -39,8 +40,7 @@
     "@material/mwc-list": "0.27.0",
     "@material/mwc-textfield": "0.27.0",
     "lit-element": "2.5.1",
-    "lit-html": "1.4.1",
-    "lit-translate": "^1.2.1"
+    "lit-html": "1.4.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
