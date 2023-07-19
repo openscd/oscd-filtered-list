@@ -11,7 +11,7 @@ jobs:
   save-pr-data:
     name: Save PR data to file
     runs-on: ubuntu-latest
-    if: ${{ (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]') || (github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target') }}
+    if: ${{ (github.event.pull_request.base.repo.full_name != 'openscd/open-scd') && (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]') || (github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target') }}
     steps:
       - name: Save PR node_id and event_action to files
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
