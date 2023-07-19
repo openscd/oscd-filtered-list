@@ -18,7 +18,7 @@ env:
 jobs:
   read-data-and-automate:
     runs-on: ubuntu-latest
-    if: github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success' && github.actor != 'github-actions[bot]'
     outputs:
       pr_node_id: ${{ steps.pr_node_id.outputs.content }}
       event_action: ${{ steps.event_action.outputs.content }}
