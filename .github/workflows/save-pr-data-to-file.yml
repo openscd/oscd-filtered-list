@@ -13,9 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ (github.event.pull_request.base.repo.full_name != 'openscd/open-scd') && github.event.pull_request.user.login != 'github-actions[bot]' }}
     steps:
-      # Add a log to see what github.actor is
-      - name: Log user
-        run: echo ${{ github.event.pull_request.user.login }}
       - name: Save PR node_id and event_action to files
         if: github.event_name == 'pull_request' || github.event_name == 'pull_request_target'
         run: echo ${{ github.event.pull_request.node_id }} > PR_NODE_ID.txt && echo ${{ github.event.action }} > EVENT_ACTION.txt && echo ${{ github.event.pull_request.merged }} > IS_MERGED.txt
