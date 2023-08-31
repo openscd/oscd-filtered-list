@@ -6,6 +6,7 @@
   "version": "1.1.0",
   "browser": "./dist/OscdFilteredList.js",
   "module": "./dist/OscdFilteredList.js",
+  "types": "./dist/OscdFilteredList.d.ts",
   "files": [
     "dist/**/*"
   ],
