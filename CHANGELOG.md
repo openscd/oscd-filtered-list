@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/openscd/oscd-filtered-list/compare/v1.1.0...v1.1.1) (2023-08-31)
+
+
+### Bug Fixes
+
+* update package.json to accomodate type export ([#44](https://github.com/openscd/oscd-filtered-list/issues/44)) ([5a36afe](https://github.com/openscd/oscd-filtered-list/commit/5a36afe2c3996db0a99f1f347b8f9dcac2067326))
+* updated translation ([#36](https://github.com/openscd/oscd-filtered-list/issues/36)) ([f60ba05](https://github.com/openscd/oscd-filtered-list/commit/f60ba0515df60321cec361b7a6cbe639efdd89c9))
+
 ## [1.1.0](https://github.com/openscd/oscd-filtered-list/compare/v1.0.1...v1.1.0) (2023-07-12)
 
 
