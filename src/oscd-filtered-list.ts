@@ -20,7 +20,7 @@ import { TextField } from '@material/mwc-textfield';
 import '@material/mwc-list/mwc-list-item-base';
 import { ListItem } from '@material/mwc-list/mwc-list-item';
 
-function debounce(callback: () => void, delay = 250): Promise<void> {
+function debounce(callback: () => void, delay = 500): Promise<void> {
   let timeout: any;
   return new Promise(resolve => {
     clearTimeout(timeout);
@@ -163,7 +163,7 @@ export class OscdFilteredList extends LitElement {
           'mwc-list-item, mwc-check-list-item, mwc-radio-list-item'
         )
       ).forEach(item => hideFiltered(item as ListItem, this.searchField.value));
-    }, 500);
+    });
   }
 
   firstUpdated(): void {
