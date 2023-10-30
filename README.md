@@ -87,6 +87,15 @@ npm start
 To run a local development server that serves the basic demo located in `demo/index.html`
 
 
+## `src/OscdFilteredList.ts`:
+
+### Exports
+
+| Kind                        | Name                 | Declaration      | Module                     | Package |
+| --------------------------- | -------------------- | ---------------- | -------------------------- | ------- |
+| `custom-element-definition` | `oscd-filtered-list` | OscdFilteredList | /src/oscd-filtered-list.js |         |
+| `js`                        | `OscdFilteredList`   | OscdFilteredList | src/OscdFilteredList.ts    |         |
+
 ## `src/oscd-filtered-list.ts`:
 
 ### class: `OscdFilteredList`, `oscd-filtered-list`
@@ -115,9 +124,9 @@ To run a local development server that serves the basic demo located in `demo/in
 
 #### Methods
 
-| Name            | Privacy | Description | Parameters | Return | Inherited From |
-| --------------- | ------- | ----------- | ---------- | ------ | -------------- |
-| `onFilterInput` |         |             |            | `void` |                |
+| Name            | Privacy | Description | Parameters | Return          | Inherited From |
+| --------------- | ------- | ----------- | ---------- | --------------- | -------------- |
+| `onFilterInput` | public  |             |            | `Promise<void>` |                |
 
 #### Events
 
@@ -142,15 +151,6 @@ To run a local development server that serves the basic demo located in `demo/in
 | ---- | ------------------ | ---------------- | ------------------------- | ------- |
 | `js` | `redispatchEvent`  | redispatchEvent  | src/oscd-filtered-list.ts |         |
 | `js` | `OscdFilteredList` | OscdFilteredList | src/oscd-filtered-list.ts |         |
-
-## `src/OscdFilteredList.ts`:
-
-### Exports
-
-| Kind                        | Name                 | Declaration      | Module                     | Package |
-| --------------------------- | -------------------- | ---------------- | -------------------------- | ------- |
-| `custom-element-definition` | `oscd-filtered-list` | OscdFilteredList | /src/oscd-filtered-list.js |         |
-| `js`                        | `OscdFilteredList`   | OscdFilteredList | src/OscdFilteredList.ts    |         |
 
 
 &copy; 2023 Alliander N.V.

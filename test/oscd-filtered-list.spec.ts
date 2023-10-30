@@ -142,7 +142,7 @@ describe('oscd-filtered-list', () => {
   describe('allows to filter on', () => {
     it('directly slotted mwc-check-list-item', async () => {
       element.searchField.value = 'item1';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
 
@@ -155,7 +155,7 @@ describe('oscd-filtered-list', () => {
 
     it('directly slotted twoline mwc-check-list-item', async () => {
       element.searchField.value = 'item2sec';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
 
@@ -168,7 +168,7 @@ describe('oscd-filtered-list', () => {
 
     it('uses space as logic AND ', async () => {
       element.searchField.value = 'item item3sec';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
       const visibleItems =
@@ -180,7 +180,7 @@ describe('oscd-filtered-list', () => {
 
     it('nested mwc-list-item elements', async () => {
       element.searchField.value = 'nesteditem5';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
       const visibleItems =
@@ -192,7 +192,7 @@ describe('oscd-filtered-list', () => {
 
     it('nested mwc-radio-list-item elements', async () => {
       element.searchField.value = 'nesteditem6';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
       const visibleItems =
@@ -204,7 +204,7 @@ describe('oscd-filtered-list', () => {
 
     it('items value attribute', async () => {
       element.searchField.value = 'item7';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
       const visibleItems =
@@ -216,7 +216,7 @@ describe('oscd-filtered-list', () => {
 
     it('allows filtering with a ? wildcard', async () => {
       element.searchField.value = 'item?';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
       const hiddenItems = element.querySelectorAll('.hidden').length;
@@ -225,7 +225,7 @@ describe('oscd-filtered-list', () => {
 
     it('allows filtering with a * wildcard', async () => {
       element.searchField.value = 'te*sec';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
       const hiddenItems = element.querySelectorAll('.hidden').length;
@@ -239,7 +239,7 @@ describe('oscd-filtered-list', () => {
 
     it('allows filtering with two ? wildcards', async () => {
       element.searchField.value = 'nest??item';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
       const visibleItems =
@@ -253,7 +253,7 @@ describe('oscd-filtered-list', () => {
 
     it('allows filtering with a * and ? wildcard', async () => {
       element.searchField.value = 'n*tem?';
-      element.onFilterInput();
+      await element.onFilterInput();
       element.requestUpdate();
       await element.updateComplete;
       const visibleItems =
