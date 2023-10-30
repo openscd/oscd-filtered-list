@@ -22,7 +22,7 @@ import { ListItem } from '@material/mwc-list/mwc-list-item';
 
 function debounce(callback: () => void, delay = 250): Promise<void> {
   let timeout: any;
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
       callback();
